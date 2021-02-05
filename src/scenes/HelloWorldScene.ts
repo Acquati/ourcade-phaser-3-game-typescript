@@ -44,8 +44,8 @@ export default class HelloWorldScene extends Phaser.Scene {
       setXY: { x: 12, y: 0, stepX: 70 }
     })
 
-    this.stars.children.iterate(object => {
-      const child = object as Phaser.Physics.Arcade.Image
+    this.stars.children.iterate(childObject => {
+      const child = childObject as Phaser.Physics.Arcade.Image
       child.setBounceY(Phaser.Math.FloatBetween(0.4, 0.8))
     })
 
@@ -77,7 +77,14 @@ export default class HelloWorldScene extends Phaser.Scene {
 
     this.physics.add.collider(this.player, this.platforms)
 
+    this.physics.add.overlap(this.player, this.stars, this.handleCollectStar, undefined, this)
+
     this.cursors = this.input.keyboard.createCursorKeys()
+  }
+
+  private handleCollectStar(playerObject: Phaser.GameObjects.GameObject, starObject: Phaser.GameObjects.GameObject) {
+    const star = starObject as Phaser.Physics.Arcade.Image
+    star.disableBody(true, true)
   }
 
   update() {
