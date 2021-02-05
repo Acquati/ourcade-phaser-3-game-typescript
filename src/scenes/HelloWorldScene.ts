@@ -3,7 +3,7 @@ import Phaser from 'phaser'
 export default class HelloWorldScene extends Phaser.Scene {
   private platforms!: Phaser.Physics.Arcade.StaticGroup
   private player!: Phaser.Physics.Arcade.Sprite
-  private cursors!: Phaser.Types.Input.Keyboard.CursorKeys
+  private cursors?: Phaser.Types.Input.Keyboard.CursorKeys
 
   constructor() {
     super('hello-world')
@@ -63,24 +63,23 @@ export default class HelloWorldScene extends Phaser.Scene {
   }
 
   update() {
-    if (this.cursors.left.isDown) {
-      this.player.setVelocityX(-160);
+    if (!this.cursors) { return }
 
-      this.player.anims.play('left', true);
+    if (this.cursors.left?.isDown) {
+      this.player.setVelocityX(-160)
+      this.player.anims.play('left', true)
     }
-    else if (this.cursors.right.isDown) {
-      this.player.setVelocityX(160);
-
-      this.player.anims.play('right', true);
+    else if (this.cursors.right?.isDown) {
+      this.player.setVelocityX(160)
+      this.player.anims.play('right', true)
     }
     else {
-      this.player.setVelocityX(0);
-
-      this.player.anims.play('turn');
+      this.player.setVelocityX(0)
+      this.player.anims.play('turn')
     }
 
-    if (this.cursors.up.isDown && this.player.body.touching.down) {
-      this.player.setVelocityY(-330);
+    if (this.cursors.up?.isDown && this.player.body.touching.down) {
+      this.player.setVelocityY(-330)
     }
   }
 }
