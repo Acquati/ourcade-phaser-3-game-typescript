@@ -81,7 +81,7 @@ export default class HelloWorldScene extends Phaser.Scene {
 
     this.physics.add.overlap(this.player, this.stars, this.handleCollectStar, undefined, this)
 
-    this.scoreText = this.add.text(16, 16, 'Score: 0', { fontSize: '32px', backgroundColor: '#000' })
+    this.scoreText = this.add.text(16, 16, 'Score: ' + this.score, { fontSize: '32px' })
 
     this.cursors = this.input.keyboard.createCursorKeys()
   }
