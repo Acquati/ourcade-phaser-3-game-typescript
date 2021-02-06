@@ -7,6 +7,8 @@ export default class HelloWorldScene extends Phaser.Scene {
   private stars!: Phaser.Physics.Arcade.Group
   private score: number = 0
   private scoreText!: Phaser.GameObjects.Text
+  private bombs!: Phaser.Physics.Arcade.Group
+  private gameOver: boolean = false
 
   constructor() {
     super('hello-world')
@@ -29,11 +31,6 @@ export default class HelloWorldScene extends Phaser.Scene {
     // Platforms
     this.platforms = this.physics.add.staticGroup()
 
-    // const ground: Phaser.Physics.Arcade.Image = this.platforms.create(400, 568, 'ground')
-    // ground
-    //   .setScale(2)
-    //   .refreshBody()
-
     this.platforms.create(400, 568, 'ground').setScale(2).refreshBody()
     this.platforms.create(600, 400, 'ground')
     this.platforms.create(50, 250, 'ground')
@@ -52,6 +49,11 @@ export default class HelloWorldScene extends Phaser.Scene {
     })
 
     this.physics.add.collider(this.stars, this.platforms)
+
+    // Bombs
+    this.bombs = this.physics.add.group()
+
+    this.physics.add.collider(this.bombs, this.platforms)
 
     // Player
     this.player = this.physics.add.sprite(100, 450, 'dude')
@@ -81,6 +83,8 @@ export default class HelloWorldScene extends Phaser.Scene {
 
     this.physics.add.overlap(this.player, this.stars, this.handleCollectStar, undefined, this)
 
+    this.physics.add.overlap(this.player, this.bombs, this.handleHitBomb, undefined, this)
+
     this.scoreText = this.add.text(16, 16, 'Score: ' + this.score, { fontSize: '32px' })
 
     this.cursors = this.input.keyboard.createCursorKeys()
@@ -91,6 +95,31 @@ export default class HelloWorldScene extends Phaser.Scene {
     star.disableBody(true, true)
     this.score += 10
     this.scoreText.setText('Score: ' + this.score)
+
+    if (this.stars.countActive(true) === 0) {
+      this.stars.children.iterate(childObject => {
+        const child = childObject as Phaser.Physics.Arcade.Image
+        child.enableBody(true, child.x, 0, true, true)
+      })
+
+      if (this.player) {
+        const x = (this.player.x < 400)
+          ? Phaser.Math.Between(400, 800)
+          : Phaser.Math.Between(0, 400)
+
+        const bomb: Phaser.Physics.Arcade.Image = this.bombs.create(x, 16, 'bomb')
+        bomb.setBounce(1)
+        bomb.setCollideWorldBounds(true)
+        bomb.setVelocity(Phaser.Math.Between(-200, 200), 20)
+      }
+    }
+  }
+
+  private handleHitBomb(playerObject: Phaser.GameObjects.GameObject, bombObject: Phaser.GameObjects.GameObject) {
+    this.physics.pause()
+    this.player.setTint(0xff0000)
+    this.player.anims.play('turn')
+    this.gameOver = true
   }
 
   update() {
