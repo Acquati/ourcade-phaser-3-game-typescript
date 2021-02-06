@@ -31,6 +31,8 @@ cd making-your-first-phaser-3-game-in-typescript # or 'my-folder-name'
 yarn install
 ```
 
+[Download the assets](http://phaser.io/tutorials/making-your-first-phaser-3-game/phaser3-tutorial-src.zip) and move the sprites to './public/assets/'
+
 Start development server:
 
 ```
