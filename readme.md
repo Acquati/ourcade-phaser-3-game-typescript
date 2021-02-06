@@ -2,7 +2,7 @@
 
 # Making Your First Phaser 3 Game in Typescript
 
-Based on the tutorial [Making Your First Phaser 3 Game](http://phaser.io/tutorials/making-your-first-phaser-3-game/part1) and [Ourcade - Making Your First Phaser 3 Game in TypeScript](https://www.youtube.com/watch?v=Pq75oRBjtzs&list=PLumYWZ2t7CRvLU1E-n6VDiOdfEeRQSXPE&index=1).
+This is the final state of the tutorials [Making Your First Phaser 3 Game](http://phaser.io/tutorials/making-your-first-phaser-3-game/part1) and [Ourcade - Making Your First Phaser 3 Game in TypeScript](https://www.youtube.com/watch?v=Pq75oRBjtzs&list=PLumYWZ2t7CRvLU1E-n6VDiOdfEeRQSXPE&index=1).
 
 This project uses [phaser3-typescript-parcel-template](https://github.com/ourcade/phaser3-typescript-parcel-template).
 
@@ -15,19 +15,19 @@ You'll need [Node.js](https://nodejs.org/en/) and [yarn](https://yarnpkg.com/).
 Clone this repository to your local machine:
 
 ```bash
-git clone https://github.com/Acquati/ourcade-phaser-3-game-typescript.git
+git clone https://github.com/Acquati/making-your-first-phaser-3-game-in-typescript.git
 ```
 
-This will create a folder named `ourcade-phaser-3-game-typescript`. You can specify a different folder name like this:
+This will create a folder named `making-your-first-phaser-3-game-in-typescript`. You can specify a different folder name like this:
 
 ```bash
-git clone https://github.com/Acquati/ourcade-phaser-3-game-typescript.git my-folder-name
+git clone https://github.com/Acquati/making-your-first-phaser-3-game-in-typescript.git my-folder-name
 ```
 
 Go into your new project folder and install dependencies:
 
 ```bash
-cd ourcade-phaser-3-game-typescript # or 'my-folder-name'
+cd making-your-first-phaser-3-game-in-typescript # or 'my-folder-name'
 yarn install
 ```
 
@@ -36,6 +36,8 @@ Start development server:
 ```
 yarn start
 ```
+
+Access [http://localhost:8000/](http://localhost:8000/)
 
 To create a production build:
 
